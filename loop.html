@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css"  href="assets/css/style.css"></link>
+    <title>boxes</title>
+</head>
+<body>
+    <h1>Answer: <span id="answer"></span></h1>
+    <div id="board"></div>
+    <div id="lettersLeft"></div>
+    <div id="guessesLeft"></div>
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    var words = ["dunk","tank","splash","water","summer","wet","fun","throw","hit","miss"]
+    var wordn = Math.floor(Math.random() * words.length);
+    var answer = words[wordn];
+    var answerViews = answer.split('');
+
+    $("#answer").text(answer);
+
+    var board=[];
+
+    for (i = 0; i < answer.length; i++){
+        board[i]= " - ";
+        console.log(board);
+    }
+
+    $("#board").text(board);
+
+    var lettersLeft = answer.length;
+    $("#lettersLeft").text(lettersLeft);
+
+    var guessesLeft = 10;
+    $("#guessesLeft").text(guessesLeft);
+
+    
+
+    document.onkeyup = function(event){
+        var plyg = event.key;
+        console.log(plyg);
+        var n = answer.search(plyg);
+        console.log(n);
+
+        for (var i = 0; i < answer.length; i++){        
+            var letter = answer.charAt(i);
+            if (plyg === letter){
+            board[n] = plyg;
+            console.log(board);
+            $("#board").text(board);
+            lettersLeft--;
+            $("#lettersLeft").text(lettersLeft);
+            }
+            else{
+                guessesLeft = guessesLeft - 1;
+                $("#guessesLeft").text(guessesLeft);
+            }
+        }
+    }
+    
+    </script>
+
+    
+</body>
+</html>

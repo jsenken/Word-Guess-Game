@@ -1,0 +1,39 @@
+#dunktankpic{
+    height: 300px;
+    width: 300px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.container{
+    text-align: center;
+    background-color: navy;
+}
+
+#board{
+    text-align: center;
+    font-size: 36pt;
+    background-color: white;
+}
+
+#title{
+    text-align: center;
+    color: red;
+    background-color: white;
+    border: 5px solid red;
+    font-size: 36pt;
+    font-family: 'Indie Flower', cursive;
+
+}
+
+body{
+    font-family: 'Indie Flower', cursive;
+}
+
+#remain{
+    font-size: 20pt;
+}
+
+#guesses{
+    font-size: 20pt;
+}

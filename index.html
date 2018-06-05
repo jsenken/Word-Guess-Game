@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css"  href="assets/css/reset.css"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"  href="assets/css/style.css"></link>
+    <title>Dunk Tank Man</title>
+</head>
+<body>
+    <div class="container"></div>
+    <div class="row">
+        <div class="col-md-12" id="title">Dunk Tank Man</div>
+    </div>
+    <div class="row">
+    <div class= "col-md-2"></div>
+    <div class= "col-md-8" id="board" >Board</div>
+    <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+    <div class= "col-md-4"></div>
+    <div class= "col-md-4"><img src="assets/images/dunktank.png" class="center-block" id="dunktankpic"></div>
+    <div class= "col-md-4"></div>
+    </div>
+    <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4" id="remain">Guesses Remaining: <span id="guessesRem"></span></div>
+    <div class="col-md-4" id="guesses">Letters Already Guessed: <span id="guessLog"></span></div>
+    <div class="col-md-2"></div>
+    </div>
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    var words = ["dunk","tank","splash","water","summer","wet","fun","throw","hit","miss"]
+    var wordn = Math.floor(Math.random() * words.length);
+    var answer = words[wordn];
+    console.log(answer);
+    var lettersLeft = answer.length;
+    console.log(lettersLeft);
+    var guessesRem = 10;
+    $("#guessesRem").text(guessesRem);
+    var guessLog = [];
+    $("#guessLog").text(guessLog);
+    var splashSound = new Audio();
+    splashSound.src = "assets/Sounds/splash.mp3"
+    var missSound = new Audio();
+    missSound.src = "assets/Sounds/cheer.mp3"
+    var closeSound = new Audio();
+    closeSound.src = "assets/Sounds/close.mp3"
+
+    var guessArr;
+    var guessArrCom = [];
+    for (var i = 0; i < answer.length; i++){
+        guessArrCom[i] = " _ ";
+    }
+    guessArr = guessArrCom.join(" ");
+    $("#board").text(guessArr);
+
+        $("body").keyup(function(event){
+            var guess = event.key;
+                guessLog.push(guess);
+                $("#guessLog").text(guessLog);
+
+            for (var j = 0; j < answer.length; j++){
+
+                if (answer[j] == guess){
+                    guessArrCom[j] = guess;
+                    console.log(guessArr[j]);
+                    guessArr = guessArrCom.join(" ");
+                    $("#board").text(guessArr);
+                    closeSound.play();
+                    lettersLeft --;
+                    console.log(lettersLeft);
+                }
+            }
+            if (lettersLeft === 0){
+                    alert("Direct Hit!");
+                    splashSound.play();
+                    $("#dunktankpic").attr("src","assets/images/dunked.png");
+
+                }
+                
+            var check = answer.includes(guess);
+            console.log(check);
+            if (check == false){
+                guessesRem--;
+                $("#guessesRem").text(guessesRem);
+                console.log(guessesRem);
+                missSound.play();
+            }
+
+            if (guessesRem === 0){
+                alert("You lose!");
+            //     guessesRem = 10;
+            //     guessArr = [];
+            //     var wordn = Math.floor(Math.random() * words.length);
+            //     var answer = words[wordn];
+            //     console.log(answer);
+            //     var lettersLeft = answer.length;
+
+            }
+        });
+
+
+        
+
+
+
+
+    </script>
+    
+</body>
+</html>
